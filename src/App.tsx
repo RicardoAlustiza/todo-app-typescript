@@ -76,6 +76,20 @@ const App: React.FC = () => {
     setTodos(newTodos)
   }
 
+  const handleUpdateTitle = ({ id, title }: { id: string, title: string}): void => {
+    const newTodos = todos.map((todo) => {
+      if(todo.id === id) {
+        return {
+          ...todo, title
+        }
+      }
+
+      return todo
+    })
+
+    setTodos(newTodos)
+  }
+
   return (
     <div className="todoapp">
       <HeaderComponent
@@ -84,6 +98,7 @@ const App: React.FC = () => {
       <TodosComponent
         onToggleCompleteTodo={handleCompleted}
         onRemoveTodo={handleRemove}
+        setTitle={handleUpdateTitle}
         todos={filteredTodos}
       />
       <FooterComponent
